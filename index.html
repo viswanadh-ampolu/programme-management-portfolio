@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orion Programme Dashboard</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#ffffff; --ink:#1a1d24; --muted:#5b6472;
+    --line:#e4e7ec; --accent:#2f6df6;
+    --green:#1a9d57; --amber:#d98a00; --red:#d64545; --grey:#9aa3b2;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.1);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f1115; --panel:#171a21; --ink:#e8ebf0; --muted:#9aa3b2;
+      --line:#262b35; --accent:#5b8cff;
+      --green:#35c07a; --amber:#f0a92b; --red:#f06a6a; --grey:#6b7484;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f1115; --panel:#171a21; --ink:#e8ebf0; --muted:#9aa3b2;
+    --line:#262b35; --accent:#5b8cff;
+    --green:#35c07a; --amber:#f0a92b; --red:#f06a6a; --grey:#6b7484;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:24px 16px 56px;}
+  .wrap{max-width:1040px;margin:0 auto;}
+  header{margin-bottom:20px;}
+  .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;}
+  h1{margin:4px 0 2px;font-size:27px;line-height:1.15;}
+  .sub{color:var(--muted);font-size:14px;}
+  .grid{display:grid;gap:16px;}
+  .kpis{grid-template-columns:repeat(4,1fr);margin:20px 0;}
+  @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:16px;box-shadow:var(--shadow);}
+  .kpi .val{font-size:24px;font-weight:720;letter-spacing:-.01em;}
+  .kpi .lbl{color:var(--muted);font-size:12.5px;margin-top:2px;}
+  .kpi .delta{font-size:12px;margin-top:6px;font-weight:600;}
+  .up{color:var(--green)} .down{color:var(--red)}
+  .cols{grid-template-columns:1.4fr 1fr;}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+  h2{font-size:15px;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+    padding:3px 10px;border-radius:999px;}
+  .pill.amber{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber)}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+  .dot.g{background:var(--green)}.dot.a{background:var(--amber)}.dot.r{background:var(--red)}.dot.n{background:var(--grey)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;}
+  tr:last-child td{border-bottom:none;}
+  .bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:4px;}
+  .bar>span{display:block;height:100%;background:var(--accent);}
+  .rag{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .rag div{font-size:13px;display:flex;align-items:center;gap:7px;}
+  .milestones li{list-style:none;display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+  .milestones{margin:0;padding:0;}
+  .milestones li:last-child{border-bottom:none}
+  .mtag{margin-left:auto;font-size:11.5px;color:var(--muted);font-weight:600;}
+  footer{color:var(--muted);font-size:12px;margin-top:28px;text-align:center;}
+  a{color:var(--accent);}
+  .score{font-weight:700;padding:1px 7px;border-radius:6px;font-size:12.5px;}
+  .score.r{background:color-mix(in srgb,var(--red) 18%,transparent);color:var(--red)}
+  .score.a{background:color-mix(in srgb,var(--amber) 18%,transparent);color:var(--amber)}
+  .score.g{background:color-mix(in srgb,var(--green) 18%,transparent);color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Programme Dashboard · Demo</div>
+    <h1>Orion — Customer Digital Onboarding Transformation</h1>
+    <div class="sub">Month 4 · <span class="pill amber"><span class="dot a"></span>Overall AMBER</span> &nbsp; Illustrative data · built by Viswanadham Ampolu</div>
+  </header>
+
+  <!-- KPIs -->
+  <div class="grid kpis">
+    <div class="card kpi"><div class="val">£0.78m</div><div class="lbl">Spent of £2.4m budget</div><div class="delta up">On plan (+£0.07m variance)</div></div>
+    <div class="card kpi"><div class="val">2 / 9</div><div class="lbl">Milestones delivered</div><div class="delta up">M1 &amp; M2 complete</div></div>
+    <div class="card kpi"><div class="val">10 → &lt;1</div><div class="lbl">Days to onboard (target)</div><div class="delta up">Baseline confirmed</div></div>
+    <div class="card kpi"><div class="val">1 🔴</div><div class="lbl">Red risks (score ≥ 15)</div><div class="delta down">R-01 compliance block</div></div>
+  </div>
+
+  <div class="grid cols">
+    <!-- Milestones -->
+    <div class="card">
+      <h2>🗺️ Milestones</h2>
+      <ul class="milestones">
+        <li><span class="dot g"></span> M1 — Discovery complete, journey mapped <span class="mtag">Done · M2</span></li>
+        <li><span class="dot g"></span> M2 — Target architecture signed off <span class="mtag">Done · M3</span></li>
+        <li><span class="dot a"></span> M3 — KYC/AML rules v1 approved <span class="mtag">At risk · M4</span></li>
+        <li><span class="dot n"></span> M4 — MVP journey live in test <span class="mtag">Next · M5</span></li>
+        <li><span class="dot n"></span> M5 — Automated identity check integrated <span class="mtag">M7</span></li>
+        <li><span class="dot n"></span> M6 — Controlled pilot launched <span class="mtag">M9</span></li>
+        <li><span class="dot n"></span> M7 — Audit sign-off on automated KYC <span class="mtag">M10</span></li>
+        <li><span class="dot n"></span> M8 — National rollout complete <span class="mtag">M11</span></li>
+        <li><span class="dot n"></span> M9 — Manual path decommissioned, handover <span class="mtag">M12</span></li>
+      </ul>
+    </div>
+
+    <!-- RAG + budget -->
+    <div class="card">
+      <h2>🚦 Health by dimension</h2>
+      <div class="rag">
+        <div><span class="dot g"></span> Scope</div>
+        <div><span class="dot a"></span> Schedule</div>
+        <div><span class="dot g"></span> Budget</div>
+        <div><span class="dot a"></span> Risk</div>
+        <div><span class="dot a"></span> Resource</div>
+        <div><span class="dot g"></span> Benefits</div>
+      </div>
+      <h2 style="margin-top:20px">💷 Budget burn</h2>
+      <div class="lbl" style="color:var(--muted);font-size:12.5px">£0.78m of £2.4m (33%)</div>
+      <div class="bar"><span style="width:33%"></span></div>
+      <h2 style="margin-top:20px">📈 Benefit targets</h2>
+      <table>
+        <tr><th>Measure</th><th>Base</th><th>Target</th></tr>
+        <tr><td>Time to onboard</td><td>10 d</td><td>&lt;1 d</td></tr>
+        <tr><td>Completion rate</td><td>78%</td><td>92%</td></tr>
+        <tr><td>Cost per onboard</td><td>£46</td><td>£18</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Top risks -->
+  <div class="card" style="margin-top:16px">
+    <h2>⚠️ Top risks &amp; issues</h2>
+    <table>
+      <tr><th>ID</th><th>Item</th><th>Owner</th><th>Score</th><th>Action</th></tr>
+      <tr><td>R-01</td><td>Compliance delays KYC approval, blocks build</td><td>Compliance Lead</td><td><span class="score r">20</span></td><td>Split approval into tranches (board decision)</td></tr>
+      <tr><td>I-02</td><td>Key engineers shared with another programme</td><td>Eng Lead</td><td><span class="score a">—</span></td><td>Ring-fence requested</td></tr>
+      <tr><td>R-02</td><td>Regulatory change forces KYC rework</td><td>Compliance Lead</td><td><span class="score a">12</span></td><td>Monthly horizon-scan; configurable rules</td></tr>
+      <tr><td>R-04</td><td>Change fatigue reduces adoption at rollout</td><td>Change Lead</td><td><span class="score a">12</span></td><td>Champions network; phased rollout</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    Demo artifact · all data illustrative · see
+    <a href="docs/status-report.md">status report</a> ·
+    <a href="docs/raid-log.md">RAID log</a> ·
+    <a href="docs/roadmap.md">roadmap</a> ·
+    <a href="README.md">README</a>
+  </footer>
+</div>
+</body>
+</html>
